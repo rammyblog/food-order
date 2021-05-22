@@ -24,11 +24,11 @@ const Login = () => {
   return (
     <>
       <Flex>
-        <Center flex="0.6">
+        <Center flex={["0", "0.6", "0.6"]}>
           <Image boxSize="500px" src={LoginImage} alt="Login" />
         </Center>
 
-        <Box flex="0.4" alignSelf="center">
+        <Box flex={["1", "0.4", "0.4"]} alignSelf="center">
           <Heading as="h3" size="lg" marginBottom="10px">
             Welcome Back!
           </Heading>
@@ -70,7 +70,11 @@ const Login = () => {
                             id="email"
                             placeholder="Email"
                             size="lg"
-                            width="400px"
+                            width={{
+                              base: "auto", // 0-48em
+                              md: "auto", // 48em-80em,
+                              xl: "400px", // 80em+
+                            }}
                           />
                         </InputGroup>
                         <FormErrorMessage>{form.errors.email}</FormErrorMessage>
@@ -97,7 +101,11 @@ const Login = () => {
                             id="password"
                             placeholder="Password"
                             size="lg"
-                            width="400px"
+                            width={{
+                              base: "auto", // 0-48em
+                              md: "auto", // 48em-80em,
+                              xl: "400px", // 80em+
+                            }}
                           />
                         </InputGroup>
                         <FormErrorMessage>
