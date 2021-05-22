@@ -1,22 +1,15 @@
 import "./App.css";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import BaseRouter from "./routes";
 
 function App() {
   return (
-    <div className="App">
-      <Alert status="error">
-        <AlertIcon />
-        <AlertTitle mr={2}>Your browser is outdated!</AlertTitle>
-        <AlertDescription>
-          Your Chakra experience may be degraded.
-        </AlertDescription>
-      </Alert>
-    </div>
+    <Router>
+      <BaseRouter />
+      <Link href="/login">Login</Link>
+      <Link href="/register">Register</Link>
+    </Router>
   );
 }
 
