@@ -2,10 +2,10 @@
   "name": "food-order",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "client": "npm run start --prefix frontend",
+    "client": "npm run start --prefix client",
     "server": "nodemon backend/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
