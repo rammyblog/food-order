@@ -12,6 +12,7 @@ import {
   InputGroup,
   InputLeftElement,
   Stack,
+  Link,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import React from "react";
@@ -124,6 +125,12 @@ const Login = () => {
                 >
                   Login
                 </Button>
+                <Text marginTop="20px">
+                  Don't have an account?{" "}
+                  <Link color="blue.500" href="/register">
+                    Sign Up
+                  </Link>
+                </Text>
               </Form>
             )}
           </Formik>
