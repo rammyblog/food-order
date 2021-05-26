@@ -15,13 +15,24 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
-import React from "react";
-import LoginImage from "../assets/images/login.svg";
+import React, { useEffect } from "react";
+import LoginImage from "../../assets/images/login.svg";
 import { Formik, Form, Field } from "formik";
 
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin } from "../../redux/auth/authActionCreators";
+import AlertReusable from "../common/Alert";
 
-const Login = () => {
+const Login = ({ history }) => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (auth.token) {
+      history.push("/profile");
+    }
+  }, [auth.token, history, dispatch]);
   return (
     <>
       <Flex>
@@ -37,13 +48,15 @@ const Login = () => {
             Fill in your login credentials to pick up where you left off
           </Text>
 
+          {auth.error ? (
+            <AlertReusable status="error" title={auth.errResponse} />
+          ) : null}
+
           <Formik
             initialValues={{ email: "", password: "" }}
             onSubmit={(values, actions) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                actions.setSubmitting(false);
-              }, 1000);
+              const data = dispatch(authLogin(values));
+              actions.setSubmitting(auth.loading);
             }}
             validationSchema={Yup.object({
               email: Yup.string()

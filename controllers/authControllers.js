@@ -49,7 +49,7 @@ const loginController = async (req, res) => {
       return res.status(400).json({ error_msg: "Incorrect password" });
     }
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    return res.status(200).json({ access_token: token });
+    return res.status(200).json({ food_order_access_token: token });
   } catch (error) {
     return res.status(400).json({ error_msg: error.message });
   }
