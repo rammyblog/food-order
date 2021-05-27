@@ -22,12 +22,18 @@ import { Formik, Form, Field } from "formik";
 
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { authLogin } from "../../redux/auth/authActionCreators";
+import { authRegister } from "../../redux/auth/authActionCreators";
 import AlertReusable from "../common/Alert";
 
 const Register = ({ history }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (checkAuth()) {
+      history.push("/profile");
+    }
+  }, [history]);
 
   useEffect(() => {
     if (auth.token) {
@@ -64,7 +70,8 @@ const Register = ({ history }) => {
               username: "",
             }}
             onSubmit={(values, actions) => {
-              dispatch(authLogin(values));
+              delete values.confirmPassword;
+              dispatch(authRegister(values));
               actions.setSubmitting(auth.loading);
             }}
             validationSchema={Yup.object({

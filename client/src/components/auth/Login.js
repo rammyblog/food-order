@@ -23,16 +23,24 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin } from "../../redux/auth/authActionCreators";
 import AlertReusable from "../common/Alert";
+import checkAuth from "../../helpers/checkAuth";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (checkAuth()) {
+      history.push("/profile");
+    }
+  }, [history]);
+
+  useEffect(() => {
     if (auth.token) {
       history.push("/profile");
     }
   }, [auth.token, history, dispatch]);
+
   return (
     <>
       <Flex>
