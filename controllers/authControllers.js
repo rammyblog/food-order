@@ -33,7 +33,8 @@ const registerController = async (req, res) => {
 
     const user = new User(req.body);
     const savedUser = await user.save();
-    return res.status(201).json({ data: savedUser });
+    const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
+    return res.status(201).json({ food_order_access_token: token });
   } catch (error) {
     return res.status(400).json({ error_msg: error.message });
   }

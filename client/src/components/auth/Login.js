@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import React, { useEffect } from "react";
-import LoginImage from "../../assets/images/login.svg";
+import LoginImage from "../../assets/svgs/login.svg";
 import { Formik, Form, Field } from "formik";
 
 import * as Yup from "yup";
@@ -55,7 +55,7 @@ const Login = ({ history }) => {
           <Formik
             initialValues={{ email: "", password: "" }}
             onSubmit={(values, actions) => {
-              const data = dispatch(authLogin(values));
+              dispatch(authLogin(values));
               actions.setSubmitting(auth.loading);
             }}
             validationSchema={Yup.object({
