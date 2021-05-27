@@ -24,6 +24,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { authRegister } from "../../redux/auth/authActionCreators";
 import AlertReusable from "../common/Alert";
+import checkAuth from "../../helpers/checkAuth";
 
 const Register = ({ history }) => {
   const dispatch = useDispatch();
