@@ -9,32 +9,29 @@ import {
   DrawerBody,
   Input,
   DrawerFooter,
+  Box,
 } from "@chakra-ui/react";
+import CartItem from "./CartItem";
 
 const CartDrawer = ({ isOpen, onClose }) => {
   return (
     <>
-      <Drawer isOpen={isOpen} onClose={onClose}>
+      <Drawer isOpen={isOpen} onClose={onClose} size="sm">
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Cart</DrawerHeader>
 
           <DrawerBody>
-            <form
-              id="my-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                console.log("submitted");
-              }}
-            >
-              <Input name="nickname" placeholder="Type here..." />
-            </form>
+            <CartItem />
+            <CartItem />
+            <CartItem />
+            <Box>Total: $5000</Box>
           </DrawerBody>
 
           <DrawerFooter>
             <Button type="submit" form="my-form">
-              Save
+              Checkout
             </Button>
           </DrawerFooter>
         </DrawerContent>
