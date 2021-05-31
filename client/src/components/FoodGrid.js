@@ -5,7 +5,7 @@ const FoodGrid = ({ foods }) => {
   return (
     <>
       <SimpleGrid minChildWidth="250px" spacing="40px">
-        {foods ? <SingleFood /> : null}
+        {foods ? foods.map((food, idx) => <SingleFood food={food} />) : null}
       </SimpleGrid>
     </>
   );

@@ -21,7 +21,7 @@ export default function foodReducer(state = initialFoodState, action) {
       return {
         ...state,
         loading: false,
-        token: action.payload,
+        foods: action.payload,
       };
 
     case types.FOOD_FAILURE:
