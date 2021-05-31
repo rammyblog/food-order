@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 
 // Routes
 const authRoutes = require("./routes/authRoutes");
+const foodRoutes = require("./routes/foodRoutes");
 
 // Connect to mongo db
 connectDB();
@@ -18,6 +19,7 @@ app.use(morgan("tiny"));
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/food", foodRoutes);
 
 const PORT = process.env.PORT || 5000;
 
