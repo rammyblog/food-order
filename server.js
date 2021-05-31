@@ -19,7 +19,7 @@ app.use(morgan("tiny"));
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/food", foodRoutes);
+app.use("/api/foods", foodRoutes);
 
 const PORT = process.env.PORT || 5000;
 
