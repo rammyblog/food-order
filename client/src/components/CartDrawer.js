@@ -2,12 +2,10 @@ import {
   Button,
   Drawer,
   DrawerOverlay,
-  useDisclosure,
   DrawerContent,
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
-  Input,
   DrawerFooter,
   Box,
 } from "@chakra-ui/react";
@@ -26,14 +24,19 @@ const CartDrawer = ({ isOpen, onClose }) => {
             <CartItem />
             <CartItem />
             <CartItem />
-            <Box>Total: $5000</Box>
+            <Box textAlign="right" fontWeight='bold'>Total: $5000</Box>
+            <Box textAlign="right" mt='3'>
+              <Button
+                variant="outline"
+                type="submit"
+                form="my-form"
+                color="blue.600"
+                colorScheme="blue"
+              >
+                Checkout
+              </Button>
+            </Box>
           </DrawerBody>
-
-          <DrawerFooter>
-            <Button type="submit" form="my-form">
-              Checkout
-            </Button>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
