@@ -1,11 +1,13 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import SingleFood from "./SingleFood";
 
 const FoodGrid = ({ foods }) => {
   return (
     <>
       <SimpleGrid minChildWidth="250px" spacing="40px">
-        {foods ? foods.map((food, idx) => <SingleFood food={food} />) : null}
+        {foods
+          ? foods.map((food, idx) => <SingleFood key={idx} food={food} />)
+          : null}
       </SimpleGrid>
     </>
   );
