@@ -14,3 +14,4 @@ const FoodGrid = ({ foods }) => {
 };
 
 export default FoodGrid;
+  
