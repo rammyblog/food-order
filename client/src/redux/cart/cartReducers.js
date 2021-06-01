@@ -10,9 +10,7 @@ export default function cartReducer(state = initialCartState, action) {
     case types.ADD_TO_CART:
       return {
         ...state,
-
         cart: addToExistingObjInCart(state.cart, action.payload),
-        // total: calculateTotal(state.cart),
       };
 
     default:
@@ -26,7 +24,7 @@ function addToExistingObjInCart(cart, payload) {
   let existingFood = newCartState.find((obj) => obj._id === food._id);
 
   if (existingFood) {
-    existingFood.qty += qty;
+    existingFood.qty = qty;
     newCartState.totalAmount = calculateTotal(newCartState);
     return newCartState;
   } else {

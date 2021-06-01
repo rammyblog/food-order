@@ -29,7 +29,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                   <CartItem key={idx} food={food} />
                 ))}
                 <Box textAlign="right" fontWeight="bold">
-                  Total: ${cart.totalAmount}
+                  Total: ₦{cart.totalAmount}
                 </Box>
                 <Box textAlign="right" mt="3">
                   <Button

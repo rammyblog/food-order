@@ -16,7 +16,7 @@ const AlertReusable = ({ status, title, description }) => {
         <Alert status={status}>
           <AlertIcon />
           <AlertTitle mr={2}>{title}</AlertTitle>
-          <AlertDescription>{description}.</AlertDescription>
+          <AlertDescription>{description}</AlertDescription>
           <CloseButton
             onClick={() => setShow(false)}
             position="absolute"

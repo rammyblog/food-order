@@ -1,12 +1,15 @@
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Image, Flex, Text, Select, Box, IconButton } from "@chakra-ui/react";
-import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cart/cartActionCreators";
 
-const CartItem = ({ food, totalAmount }) => {
+const CartItem = ({ food }) => {
   const { image, name, qty, price } = food;
   const selectArr = Array.from({ length: 10 }, (_, i) => i + 1);
+  const dispatch = useDispatch();
+
   const handleSelectChange = (e) => {
-    console.log(e.target.value);
+    dispatch(addToCart(food, e.target.value));
   };
   return (
     <div>
