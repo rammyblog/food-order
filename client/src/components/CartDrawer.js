@@ -6,12 +6,14 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
-  DrawerFooter,
   Box,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
 
 const CartDrawer = ({ isOpen, onClose }) => {
+  const cart = useSelector((state) => state.cart.cart);
+
   return (
     <>
       <Drawer isOpen={isOpen} onClose={onClose} size="sm">
@@ -21,11 +23,15 @@ const CartDrawer = ({ isOpen, onClose }) => {
           <DrawerHeader>Cart</DrawerHeader>
 
           <DrawerBody>
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <Box textAlign="right" fontWeight='bold'>Total: $5000</Box>
-            <Box textAlign="right" mt='3'>
+            {cart && cart.length > 0 ? (
+              cart.map((food, idx) => <CartItem key={idx} food={food} />)
+            ) : (
+              <Box as="h3" fontWeight="bold" fontSize="xl">No food in cart</Box>
+            )}
+            <Box textAlign="right" fontWeight="bold">
+              Total: $5000
+            </Box>
+            <Box textAlign="right" mt="3">
               <Button
                 variant="outline"
                 type="submit"

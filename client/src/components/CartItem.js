@@ -2,25 +2,28 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { Image, Flex, Text, Select, Box, IconButton } from "@chakra-ui/react";
 import React from "react";
 
-const CartItem = () => {
+const CartItem = ({ food }) => {
+  const { image, name, qty, price } = food;
+  const selectArr = Array.from({ length: 10 }, (_, i) => i + 1);
+  const handleSelectChange = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <div>
       <Flex justifyContent="space-between" mb="2">
-        <Image
-          src="https://chopnownow.com//hq/pages/generalItem/ProductImages/thumbnails/945.jpg"
-          alt="food image"
-          boxSize="70px"
-        />
+        <Image src={image} alt={name} boxSize="70px" />
         <Box as="p" width="100px">
-          JOLLOF SPAGHETTI + CHICKEN
+          {name}
         </Box>
         <Text fontWeight="semibold" as="p">
-          $4000
+          ₦{price}
         </Text>
-        <Select width="20%">
-          <option value="1"> 1</option>
-          <option value="2"> 2</option>
-          <option value="3"> 3</option>
+        <Select width="20%" value={qty} onChange={handleSelectChange}>
+          {selectArr.map((num, idx) => (
+            <option value={num} key={idx}>
+              {num}
+            </option>
+          ))}
         </Select>
         <Box>
           <IconButton
