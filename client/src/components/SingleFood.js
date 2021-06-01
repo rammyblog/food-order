@@ -4,7 +4,7 @@ import { addToCart } from "../redux/cart/cartActionCreators";
 
 export default function SingleFood({ food }) {
   const dispatch = useDispatch();
-  const { image, name, price, _id } = food;
+  const { image, name, price } = food;
   const addFoodToCart = () => {
     // const foodDetails = { ...food};
     const qty = 1;

@@ -24,24 +24,30 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
           <DrawerBody>
             {cart && cart.length > 0 ? (
-              cart.map((food, idx) => <CartItem key={idx} food={food} />)
+              <>
+                {cart.map((food, idx) => (
+                  <CartItem key={idx} food={food} />
+                ))}
+                <Box textAlign="right" fontWeight="bold">
+                  Total: ${cart.totalAmount}
+                </Box>
+                <Box textAlign="right" mt="3">
+                  <Button
+                    variant="outline"
+                    type="submit"
+                    form="my-form"
+                    color="blue.600"
+                    colorScheme="blue"
+                  >
+                    Checkout
+                  </Button>
+                </Box>
+              </>
             ) : (
-              <Box as="h3" fontWeight="bold" fontSize="xl">No food in cart</Box>
+              <Box as="h3" fontWeight="bold" fontSize="xl">
+                No food in cart
+              </Box>
             )}
-            <Box textAlign="right" fontWeight="bold">
-              Total: $5000
-            </Box>
-            <Box textAlign="right" mt="3">
-              <Button
-                variant="outline"
-                type="submit"
-                form="my-form"
-                color="blue.600"
-                colorScheme="blue"
-              >
-                Checkout
-              </Button>
-            </Box>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

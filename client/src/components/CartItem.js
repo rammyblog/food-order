@@ -2,7 +2,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { Image, Flex, Text, Select, Box, IconButton } from "@chakra-ui/react";
 import React from "react";
 
-const CartItem = ({ food }) => {
+const CartItem = ({ food, totalAmount }) => {
   const { image, name, qty, price } = food;
   const selectArr = Array.from({ length: 10 }, (_, i) => i + 1);
   const handleSelectChange = (e) => {
