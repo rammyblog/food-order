@@ -7,13 +7,19 @@ import {
   Heading,
   Container,
   useDisclosure,
+  Avatar,
+  AvatarBadge,
+  Icon,
 } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import BaseRouter from "./routes";
 import CartDrawer from "./components/CartDrawer";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const cart = useSelector((state) => state.cart.cart);
 
   return (
     <Router>
@@ -27,7 +33,21 @@ function App() {
             Sign Up
           </Button>
           <Button colorScheme="teal">Log in</Button>
-          <Button onClick={onOpen}>Cart</Button>
+          <Avatar
+            onClick={onOpen}
+            icon={<Icon as={AiOutlineShoppingCart} />}
+            bg="white"
+            style={{ cursor: "pointer" }}
+          >
+            <AvatarBadge
+              boxSize="1.5rem"
+              bg="green.500"
+              fontSize="0.8rem"
+              color="white"
+            >
+              {cart.count}
+            </AvatarBadge>
+          </Avatar>
           <CartDrawer isOpen={isOpen} onClose={onClose} />
         </Box>
       </Flex>

@@ -18,7 +18,8 @@
     "express": "^4.17.1",
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.3"
+    "mongoose": "^5.12.3",
+    "react-icons": "^4.2.0"
   },
   "devDependencies": {
     "concurrently": "^6.0.1",

@@ -15,7 +15,7 @@ export default function SingleFood({ food }) {
       description: `We've added ${name} to the cart`,
       status: "success",
       position: 'top-right',
-      duration: 9000,
+      duration: 5000,
       isClosable: true,
     });
 
