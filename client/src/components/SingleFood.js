@@ -1,20 +1,22 @@
-import { Box, Image, Button, useToast } from "@chakra-ui/react";
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import { Box, Image, Button, useToast, IconButton } from "@chakra-ui/react";
 
-import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/cart/cartActionCreators";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../redux/cart/cartActionCreators";
 
 export default function SingleFood({ food }) {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
   const toast = useToast();
 
-  const { image, name, price } = food;
+  const { image, name, price, _id } = food;
   const addFoodToCart = () => {
     const qty = 1;
     toast({
       title: "Item added",
       description: `We've added ${name} to the cart`,
       status: "success",
-      position: 'top-right',
+      position: "top-right",
       duration: 800,
       isClosable: true,
     });
@@ -39,13 +41,36 @@ export default function SingleFood({ food }) {
             justifyContent="space-between"
           >
             <Box>₦{price}</Box>
-            <Button
-              colorScheme="blue"
-              variant="outline"
-              onClick={() => addFoodToCart()}
-            >
-              Add to cart
-            </Button>
+            {cart && cart.foods.length > 0 ? (
+              cart.foods.find((obj) => obj._id === _id) ? (
+                <Button
+                  colorScheme="red"
+                  variant="outline"
+                  leftIcon={<DeleteIcon />}
+                  onClick={() => dispatch(removeFromCart(_id))}
+                >
+                  Remove from cart
+                </Button>
+              ) : (
+                <Button
+                  colorScheme="blue"
+                  variant="outline"
+                  leftIcon={<AddIcon />}
+                  onClick={() => addFoodToCart()}
+                >
+                  Add to cart
+                </Button>
+              )
+            ) : (
+              <Button
+                colorScheme="blue"
+                variant="outline"
+                leftIcon={<AddIcon />}
+                onClick={() => addFoodToCart()}
+              >
+                Add to cart
+              </Button>
+            )}
           </Box>
         </Box>
       </Box>
