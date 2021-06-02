@@ -1,10 +1,10 @@
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Image, Flex, Text, Select, Box, IconButton } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/cart/cartActionCreators";
+import { addToCart, removeFromCart } from "../redux/cart/cartActionCreators";
 
 const CartItem = ({ food }) => {
-  const { image, name, qty, price } = food;
+  const { image, name, qty, price, _id } = food;
   const selectArr = Array.from({ length: 10 }, (_, i) => i + 1);
   const dispatch = useDispatch();
 
@@ -34,6 +34,7 @@ const CartItem = ({ food }) => {
             colorScheme="blue"
             aria-label="Delete Item from cart"
             icon={<DeleteIcon />}
+            onClick={() => dispatch(removeFromCart(_id))}
           />
         </Box>
       </Flex>

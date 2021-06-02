@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cart = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.cart);
 
   return (
     <Router>
@@ -45,7 +45,7 @@ function App() {
               fontSize="0.8rem"
               color="white"
             >
-              {cart.count}
+              {cart.count > 0 ? cart.count : 0}
             </AvatarBadge>
           </Avatar>
           <CartDrawer isOpen={isOpen} onClose={onClose} />

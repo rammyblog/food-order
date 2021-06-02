@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
 
 const CartDrawer = ({ isOpen, onClose }) => {
-  const cart = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.cart);
 
   return (
     <>
@@ -23,9 +23,9 @@ const CartDrawer = ({ isOpen, onClose }) => {
           <DrawerHeader>Cart</DrawerHeader>
 
           <DrawerBody>
-            {cart && cart.length > 0 ? (
+            {cart && cart.foods.length > 0 ? (
               <>
-                {cart.map((food, idx) => (
+                {cart.foods.map((food, idx) => (
                   <CartItem key={idx} food={food} />
                 ))}
                 <Box textAlign="right" fontWeight="bold">

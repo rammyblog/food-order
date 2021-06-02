@@ -9,3 +9,12 @@ export const addToCart = (foodDetails, qty) => {
     });
   };
 };
+
+export const removeFromCart = (id) => {
+  return function (dispatch) {
+    dispatch({
+      type: types.REMOVE_FROM_CART,
+      payload: id,
+    });
+  };
+};
