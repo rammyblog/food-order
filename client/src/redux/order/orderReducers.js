@@ -1,4 +1,4 @@
-import * as types from "./foodActionTypes";
+import * as types from "./orderActionTypes";
 
 const initialOrderState = {
   loading: false,
@@ -7,7 +7,7 @@ const initialOrderState = {
   errResponse: "",
 };
 
-export default function foodReducer(state = initialOrderState, action) {
+export default function orderReducer(state = initialOrderState, action) {
   switch (action.type) {
     case types.PAY_FOR_ORDER:
       return {
@@ -16,6 +16,13 @@ export default function foodReducer(state = initialOrderState, action) {
         error: false,
         errResponse: "",
         orderResponse: action.payload,
+      };
+    case types.ORDER_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        errResponse: action.payload,
       };
 
     default:

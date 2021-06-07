@@ -13,15 +13,9 @@ import CartItem from "./CartItem";
 import { usePaystackPayment } from "react-paystack";
 import { useEffect } from "react";
 import { getUserAction } from "../redux/user/userActionCreators";
+import { createOrderAction } from "../redux/order/orderActionCreators";
 
-const onSuccess = (props) => {
-  console.log(props);
-  // console.log(reference);
-};
-
-const onPaystackClose = () => {};
-
-const CheckoutButton = ({ initializePayment, disabled }) => {
+const CheckoutButton = ({ initializePayment, disabled, onSuccess }) => {
   return (
     <Button
       variant="outline"
@@ -31,7 +25,7 @@ const CheckoutButton = ({ initializePayment, disabled }) => {
       colorScheme="blue"
       disabled={disabled}
       onClick={() => {
-        initializePayment(onSuccess, onPaystackClose);
+        initializePayment(onSuccess);
       }}
     >
       Checkout
@@ -41,6 +35,7 @@ const CheckoutButton = ({ initializePayment, disabled }) => {
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user) || {};
   const userEmail = user.user ? user.user.email : null;
@@ -51,8 +46,12 @@ const CartDrawer = ({ isOpen, onClose }) => {
   }, [dispatch, user.user]);
   const config = {
     email: user.user ? userEmail : null,
-    amount: 20000,
+    amount: cart ? cart.totalAmount * 100 : 0,
     publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
+  };
+  const onSuccess = (props) => {
+    dispatch(createOrderAction(cart, props.reference));
+    console.log(props);
   };
   const initializePayment = usePaystackPayment(config);
 
@@ -78,11 +77,13 @@ const CartDrawer = ({ isOpen, onClose }) => {
                     <CheckoutButton
                       initializePayment={initializePayment}
                       disabled={false}
+                      onSuccess={onSuccess}
                     />
                   ) : (
                     <CheckoutButton
                       initializePayment={initializePayment}
                       disabled={true}
+                      onSuccess={onSuccess}
                     />
                   )}
                 </Box>
