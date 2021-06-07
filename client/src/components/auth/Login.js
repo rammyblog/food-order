@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authLogin } from "../../redux/auth/authActionCreators";
 import AlertReusable from "../common/Alert";
 import checkAuth from "../../helpers/checkAuth";
+import { getUserAction } from "../../redux/user/userActionCreators";
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const Login = ({ history }) => {
 
   useEffect(() => {
     if (auth.token) {
+      dispatch(getUserAction());
       history.push("/profile");
     }
   }, [auth.token, history, dispatch]);

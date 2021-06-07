@@ -1,8 +1,13 @@
 const User = require("../models/User");
 
-const getUser = async (query) => {
+const getUser = async (query, password) => {
   try {
-    const user = await User.findOne(query).select("+password");
+    let user;
+    if (password) {
+      user = await User.findOne(query).select("+password");
+    } else {
+      user = await User.findOne(query);
+    }
     if (!user) {
       throw Error("User not found");
     }

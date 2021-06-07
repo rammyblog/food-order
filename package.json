@@ -19,6 +19,7 @@
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
+    "paystack-api": "^2.0.6",
     "react-icons": "^4.2.0"
   },
   "devDependencies": {

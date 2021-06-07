@@ -23,6 +23,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { authRegister } from "../../redux/auth/authActionCreators";
+import { getUserAction } from "../../redux/user/userActionCreators";
+
 import AlertReusable from "../common/Alert";
 import checkAuth from "../../helpers/checkAuth";
 
@@ -38,6 +40,7 @@ const Register = ({ history }) => {
 
   useEffect(() => {
     if (auth.token) {
+      dispatch(getUserAction());
       history.push("/profile");
     }
   }, [auth.token, history, dispatch]);

@@ -31,7 +31,7 @@ const CartItem = ({ food }) => {
         <Box>
           <IconButton
             variant="outline"
-            colorScheme="blue"
+            colorScheme="red"
             aria-label="Delete Item from cart"
             icon={<DeleteIcon />}
             onClick={() => dispatch(removeFromCart(_id))}

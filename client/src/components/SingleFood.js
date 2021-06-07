@@ -1,5 +1,5 @@
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import { Box, Image, Button, useToast, IconButton } from "@chakra-ui/react";
+import { Box, Image, Button, useToast } from "@chakra-ui/react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/cart/cartActionCreators";

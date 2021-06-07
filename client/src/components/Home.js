@@ -9,10 +9,12 @@ const Home = () => {
   const dispatch = useDispatch();
   const foodState = useSelector((state) => state.foods);
   useEffect(() => {
+    
     if (foodState && !foodState.foods) {
+      console.log(foodState.foods);
       dispatch(getFoodFromDb());
     }
-  }, [dispatch, foodState]);
+  }, [dispatch, foodState.foods]);
 
   if (foodState && foodState.loading) {
     return (
