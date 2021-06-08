@@ -7,6 +7,7 @@ import {
   DrawerHeader,
   DrawerBody,
   Box,
+  Link,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
@@ -84,12 +85,21 @@ const CartDrawer = ({ isOpen, onClose }) => {
                       onSuccess={onSuccess}
                     />
                   ) : (
-                    // Login/Register btns
-                    <CheckoutButton
-                      initializePayment={initializePayment}
-                      disabled={true}
-                      onSuccess={onSuccess}
-                    />
+                    <>
+                      <CheckoutButton
+                        initializePayment={initializePayment}
+                        disabled={true}
+                        onSuccess={onSuccess}
+                      />
+                      <Box mt='10px'>
+                        <Button colorScheme="teal" mr="4">
+                          <Link href="/register">Sign Up</Link>
+                        </Button>
+                        <Button colorScheme="teal">
+                          <Link href="/login">Log in</Link>
+                        </Button>
+                      </Box>
+                    </>
                   )}
                 </Box>
               </>

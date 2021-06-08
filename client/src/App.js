@@ -43,7 +43,7 @@ function App() {
           onClick={onOpen}
           icon={<Icon as={AiOutlineShoppingCart} />}
           bg="white"
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", zIndex: 1 }}
         >
           <AvatarBadge
             boxSize="1.5rem"
@@ -69,7 +69,11 @@ function App() {
         <Spacer />
         <Box
           p="4"
-          style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
         >
           {checkAuth() || user ? (
             <>
