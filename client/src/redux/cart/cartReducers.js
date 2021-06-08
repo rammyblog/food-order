@@ -18,10 +18,11 @@ export default function cartReducer(state = initialCartState, action) {
         ...state,
         ...removeItemFromCart(state, action.payload),
       };
-    case types.RESTORE_FROM_LOCALSTORAGE:
-      return{
-        ...action.payload
-      }
+    case types.RESTORE_CART:
+      return {
+        ...action.payload,
+      };
+   
 
     default:
       return state;

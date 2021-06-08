@@ -31,6 +31,15 @@ export default function userReducer(state = initialUserState, action) {
         error: true,
         errResponse: action.payload,
       };
+    case "AUTH_LOGOUT":
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        errResponse: "",
+
+        user: null,
+      };
     default:
       return state;
   }

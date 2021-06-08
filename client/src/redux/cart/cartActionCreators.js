@@ -22,8 +22,19 @@ export const removeFromCart = (id) => {
 export const restoreFromLocalStorageAction = () => {
   return function (dispatch) {
     dispatch({
-      type: types.RESTORE_FROM_LOCALSTORAGE,
+      type: types.RESTORE_CART,
       payload: JSON.parse(localStorage.getItem("foodoCart")),
+    });
+  };
+};
+
+export const restoreFromPrevOrderAction = (payload) => {
+  return function (dispatch) {
+    localStorage.setItem("foodoCart", JSON.stringify(payload));
+
+    dispatch({
+      type: types.RESTORE_CART,
+      payload,
     });
   };
 };

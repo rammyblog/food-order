@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleOrderAction } from "../redux/order/orderActionCreators";
+import { restoreFromPrevOrderAction } from "../redux/cart/cartActionCreators";
 
 const SingleOrder = ({ match }) => {
   const dispatch = useDispatch();
@@ -39,6 +40,18 @@ const SingleOrder = ({ match }) => {
     }
   }, [error, errResponse, toast]);
 
+  const handleReorder = (e) => {
+    e.preventDefault();
+    dispatch(restoreFromPrevOrderAction(singleOrder.cart));
+    toast({
+      title: "Success!",
+      description: "Check the cart, It has been populated with this order",
+      status: "success",
+      position: "top-right",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
   return (
     <>
       <Text as="h1" fontWeight="bold" mb="10px">
@@ -50,7 +63,7 @@ const SingleOrder = ({ match }) => {
           <Table size="sm">
             <Thead>
               <Tr>
-                <Th>Id</Th>
+                <Th>Name</Th>
                 <Th>Qty</Th>
                 <Th>Amount</Th>
               </Tr>
@@ -74,7 +87,13 @@ const SingleOrder = ({ match }) => {
               </Tr>
             </Tfoot>
           </Table>
-          <Button variant="outline" colorScheme='blue'>Re Order</Button>
+          <Button
+            variant="outline"
+            colorScheme="blue"
+            onClick={(e) => handleReorder(e)}
+          >
+            Re Order
+          </Button>
         </>
       ) : null}
     </>

@@ -5,6 +5,7 @@ const initialSignupState = {
   token: "",
   error: false,
   errResponse: "",
+  user: null,
 };
 
 export function authReducer(state = initialSignupState, action) {
@@ -45,6 +46,7 @@ export function authReducer(state = initialSignupState, action) {
         error: false,
         errResponse: "",
         token: "",
+        user: null,
       };
 
     default:

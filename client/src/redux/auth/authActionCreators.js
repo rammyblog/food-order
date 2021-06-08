@@ -31,3 +31,10 @@ export const authLogin = (userData) => {
 export const authRegister = (userData) => {
   return authCommon("register", userData);
 };
+
+export const authLogout = () => {
+  return async function (dispatch) {
+    dispatch({ type: types.AUTH_LOGOUT });
+    localStorage.removeItem("food_order_access_token");
+  };
+};
