@@ -2,7 +2,7 @@ import * as types from "./orderActionTypes";
 
 const initialOrderState = {
   loading: false,
-  orderResponse: "",
+  orderResponse: null,
   error: false,
   errResponse: "",
 };
@@ -22,9 +22,14 @@ export default function orderReducer(state = initialOrderState, action) {
         ...state,
         loading: false,
         error: true,
+        orderResponse: null,
         errResponse: action.payload,
       };
-
+    case types.ORDER_RESPONSE_CLEAR:
+      return {
+        ...state,
+        orderResponse: null,
+      };
     default:
       return state;
   }

@@ -14,6 +14,7 @@ import { usePaystackPayment } from "react-paystack";
 import { useEffect } from "react";
 import { getUserAction } from "../redux/user/userActionCreators";
 import { createOrderAction } from "../redux/order/orderActionCreators";
+import OrderSuccess from "./OrderSuccess";
 
 const CheckoutButton = ({ initializePayment, disabled, onSuccess }) => {
   return (
@@ -38,12 +39,20 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user) || {};
+  const { orderResponse } = useSelector((state) => state.order);
   const userEmail = user.user ? user.user.email : null;
   useEffect(() => {
     if (!user.user) {
       dispatch(getUserAction());
     }
   }, [dispatch, user.user]);
+
+  // useEffect(() => {
+  //   if (orderResponse) {
+  //     history.push("/order-success");
+  //   }
+  // }, [history, orderResponse]);
+
   const config = {
     email: user.user ? userEmail : null,
     amount: cart ? cart.totalAmount * 100 : 0,
@@ -96,6 +105,12 @@ const CartDrawer = ({ isOpen, onClose }) => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
+      {orderResponse ? (
+        <OrderSuccess
+          reference={orderResponse.reference}
+          orderId={orderResponse._id}
+        />
+      ) : null}
     </>
   );
 };
