@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { getUserAction } from "../redux/user/userActionCreators";
 import { createOrderAction } from "../redux/order/orderActionCreators";
 import OrderSuccess from "./OrderSuccess";
+import checkAuth from "../helpers/checkAuth";
 
 const CheckoutButton = ({ initializePayment, disabled, onSuccess }) => {
   return (
@@ -41,8 +42,9 @@ const CartDrawer = ({ isOpen, onClose }) => {
   const user = useSelector((state) => state.user) || {};
   const { orderResponse } = useSelector((state) => state.order);
   const userEmail = user.user ? user.user.email : null;
+
   useEffect(() => {
-    if (!user.user) {
+    if (!user.user && checkAuth()) {
       dispatch(getUserAction());
     }
   }, [dispatch, user.user]);
@@ -54,7 +56,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
   };
   const onSuccess = (props) => {
     dispatch(createOrderAction(cart, props.reference));
-    console.log(props);
   };
   const initializePayment = usePaystackPayment(config);
 

@@ -34,14 +34,14 @@ const Register = ({ history }) => {
 
   useEffect(() => {
     if (checkAuth()) {
-      history.push("/profile");
+      history.push("/");
     }
   }, [history]);
 
   useEffect(() => {
     if (auth.token) {
       dispatch(getUserAction());
-      history.push("/profile");
+      history.push("/");
     }
   }, [auth.token, history, dispatch]);
 

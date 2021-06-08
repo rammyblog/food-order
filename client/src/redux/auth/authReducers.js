@@ -2,10 +2,9 @@ import * as types from "./authActionTypes";
 
 const initialSignupState = {
   loading: false,
-  token: "",
+  token: null,
   error: false,
   errResponse: "",
-  user: null,
 };
 
 export function authReducer(state = initialSignupState, action) {
@@ -45,8 +44,7 @@ export function authReducer(state = initialSignupState, action) {
         loading: false,
         error: false,
         errResponse: "",
-        token: "",
-        user: null,
+        token: null,
       };
 
     default:

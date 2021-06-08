@@ -37,7 +37,6 @@ export default function userReducer(state = initialUserState, action) {
         loading: false,
         error: false,
         errResponse: "",
-
         user: null,
       };
     default:
