@@ -36,7 +36,7 @@ const Profile = () => {
               return (
                 <Tr key={idx}>
                   <Td>
-                    <Link href={`order/${order._id}`}>{order._id}</Link>
+                    <Link href={`/order/${order._id}`}>{order._id}</Link>
                   </Td>
                   <Td>{formatDate(order.createdAt)}</Td>
                   <Td>₦{order.cart.totalAmount}</Td>

@@ -3,8 +3,8 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import { PrivateRoute } from "./components/containers/PrivateRoute";
 import Home from "./components/Home";
-import OrderSuccess from "./components/OrderSuccess";
 import Profile from "./components/Profile";
+import SingleOrder from "./components/SingleOrder";
 
 const BaseRouter = () => {
   return (
@@ -13,7 +13,7 @@ const BaseRouter = () => {
       <Route exact path="/register" component={Register} />
       <Route exact path="/" component={Home} />
       <PrivateRoute exact path="/profile/" component={Profile} />
-      {/* <PrivateRoute exact path="/order-success/" component={OrderSuccess} /> */}
+      <PrivateRoute exact path="/order/:id" component={SingleOrder} />
     </>
   );
 };

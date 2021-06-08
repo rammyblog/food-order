@@ -5,7 +5,7 @@ export const getUserAction = () => {
   return async function (dispatch) {
     dispatch({ type: types.USER_START });
     try {
-      const res = await axios.get(`api/users/`);
+      const res = await axios.get(`/api/users/`);
 
       dispatch({
         type: types.GET_USER,

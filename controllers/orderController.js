@@ -30,4 +30,24 @@ const getUserOrdersController = async (req, res) => {
   }
 };
 
-module.exports = { createOrderController, getUserOrdersController };
+const getSingleUserOrderController = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const order = await Order.findOne({ _id });
+
+    if (String(order.user) !== String(req.user._id)) {
+      return res
+        .status(401)
+        .json({ error_msg: "You are not authorized to view this order" });
+    }
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(400).json({ error_msg: error.message });
+  }
+};
+
+module.exports = {
+  createOrderController,
+  getUserOrdersController,
+  getSingleUserOrderController,
+};

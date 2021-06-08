@@ -6,6 +6,7 @@ const initialOrderState = {
   error: false,
   errResponse: "",
   orders: null,
+  singleOrder: null,  
 };
 
 export default function orderReducer(state = initialOrderState, action) {
@@ -25,6 +26,14 @@ export default function orderReducer(state = initialOrderState, action) {
         error: false,
         errResponse: "",
         orders: action.payload,
+      };
+    case types.GET_SINGLE_ORDER:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        errResponse: "",
+        singleOrder: action.payload,
       };
     case types.ORDER_FAILED:
       return {
