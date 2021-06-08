@@ -15,3 +15,18 @@ export const createOrderAction = (cart, reference) => {
     }
   };
 };
+
+export const getOrdersAction = () => {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get("api/orders");
+      dispatch({ type: types.GET_ORDERS, payload: res.data });
+    } catch (error) {
+      const error_msg =
+        error.response && error.response.data.error_msg
+          ? error.response.data.error_msg
+          : error.message;
+      dispatch({ type: types.ORDER_FAILED, payload: error_msg });
+    }
+  };
+};

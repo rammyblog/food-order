@@ -18,6 +18,14 @@ export default function orderReducer(state = initialOrderState, action) {
         errResponse: "",
         orderResponse: action.payload,
       };
+    case types.GET_ORDERS:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+        errResponse: "",
+        orders: action.payload,
+      };
     case types.ORDER_FAILED:
       return {
         ...state,

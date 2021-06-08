@@ -8,6 +8,7 @@ const orderSchema = new Schema({
   },
   cart: { type: Object, required: true },
   reference: { type: String, required: true },
+  createdAt: { type: Date, required: true, default: Date.now },
 });
 
 module.exports = model("Order", orderSchema);

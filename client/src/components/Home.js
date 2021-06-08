@@ -7,23 +7,23 @@ import { Center } from "@chakra-ui/react";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const foodState = useSelector((state) => state.foods);
+  const { loading: foodStateLoading, foods } = useSelector(
+    (state) => state.foods
+  );
   useEffect(() => {
-    
-    if (foodState && !foodState.foods) {
-      console.log(foodState.foods);
+    if (!foods) {
       dispatch(getFoodFromDb());
     }
-  }, [dispatch, foodState.foods]);
+  }, [dispatch, foods]);
 
-  if (foodState && foodState.loading) {
+  if (foodStateLoading) {
     return (
       <Center>
         <SpinnerReusable size="xl" />
       </Center>
     );
   }
-  return <div>{foodState && <FoodGrid foods={foodState.foods} />}</div>;
+  return <div>{foods && <FoodGrid foods={foods} />}</div>;
 };
 
 export default Home;
