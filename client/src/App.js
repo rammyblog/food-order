@@ -31,7 +31,9 @@ function App() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    const localStorageCart = JSON.parse(localStorage.getItem("foodoCart"));
+    const localStorageCart = JSON.parse(
+      localStorage.getItem("foodoCart") || {}
+    );
     if (localStorageCart.count > 0) {
       dispatch(restoreFromLocalStorageAction());
     }
