@@ -5,6 +5,7 @@ const initialOrderState = {
   orderResponse: null,
   error: false,
   errResponse: "",
+  orders: null,
 };
 
 export default function orderReducer(state = initialOrderState, action) {

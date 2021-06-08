@@ -21,4 +21,13 @@ const createOrderController = async (req, res) => {
   }
 };
 
-module.exports = { createOrderController };
+const getUserOrdersController = async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.user._id });
+    return res.status(200).json(orders);
+  } catch (error) {
+    return res.status(400).json({ error_msg: error.message });
+  }
+};
+
+module.exports = { createOrderController, getUserOrdersController };

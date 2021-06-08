@@ -47,12 +47,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
     }
   }, [dispatch, user.user]);
 
-  // useEffect(() => {
-  //   if (orderResponse) {
-  //     history.push("/order-success");
-  //   }
-  // }, [history, orderResponse]);
-
   const config = {
     email: user.user ? userEmail : null,
     amount: cart ? cart.totalAmount * 100 : 0,
@@ -89,6 +83,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                       onSuccess={onSuccess}
                     />
                   ) : (
+                    // Login/Register btns
                     <CheckoutButton
                       initializePayment={initializePayment}
                       disabled={true}
