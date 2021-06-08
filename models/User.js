@@ -28,11 +28,9 @@ const userSchema = new Schema({
     max: 50,
     unique: true,
   },
-  userType: {
+  address: {
     type: String,
     required: true,
-    enum: ["member", "admin"],
-    default: "member",
   },
   password: {
     type: String,

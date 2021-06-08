@@ -27,6 +27,7 @@ import { getUserAction } from "../../redux/user/userActionCreators";
 
 import AlertReusable from "../common/Alert";
 import checkAuth from "../../helpers/checkAuth";
+import { FaAddressCard, FaUserCircle } from "react-icons/fa";
 
 const Register = ({ history }) => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const Register = ({ history }) => {
               lastName: "",
               confirmPassword: "",
               username: "",
+              address: "",
             }}
             onSubmit={(values, actions) => {
               delete values.confirmPassword;
@@ -124,13 +126,7 @@ const Register = ({ history }) => {
                           <InputGroup>
                             <InputLeftElement
                               pointerEvents="none"
-                              children={
-                                <Avatar
-                                  width="15px"
-                                  height="15px"
-                                  color="blue"
-                                />
-                              }
+                              children={<FaUserCircle />}
                               marginTop="5px"
                             />
                             <Input
@@ -162,13 +158,7 @@ const Register = ({ history }) => {
                           <InputGroup>
                             <InputLeftElement
                               pointerEvents="none"
-                              children={
-                                <Avatar
-                                  width="15px"
-                                  height="15px"
-                                  color="blue"
-                                />
-                              }
+                              children={<FaUserCircle />}
                               marginTop="5px"
                             />
                             <Input
@@ -209,13 +199,7 @@ const Register = ({ history }) => {
                           <InputGroup>
                             <InputLeftElement
                               pointerEvents="none"
-                              children={
-                                <Avatar
-                                  width="15px"
-                                  height="15px"
-                                  colorScheme="blue"
-                                />
-                              }
+                              children={<FaUserCircle />}
                               marginTop="5px"
                             />
                             <Input
@@ -245,7 +229,7 @@ const Register = ({ history }) => {
                           <InputGroup>
                             <InputLeftElement
                               pointerEvents="none"
-                              children={<EmailIcon color="blue.600" />}
+                              children={<EmailIcon />}
                               marginTop="5px"
                             />
                             <Input
@@ -285,7 +269,7 @@ const Register = ({ history }) => {
                           <InputGroup>
                             <InputLeftElement
                               pointerEvents="none"
-                              children={<LockIcon color="blue.600" />}
+                              children={<LockIcon />}
                               marginTop="5px"
                             />
                             <Input
@@ -318,7 +302,7 @@ const Register = ({ history }) => {
                           <InputGroup>
                             <InputLeftElement
                               pointerEvents="none"
-                              children={<LockIcon color="blue.600" />}
+                              children={<LockIcon />}
                               marginTop="5px"
                             />
                             <Input
@@ -341,6 +325,35 @@ const Register = ({ history }) => {
                       )}
                     </Field>
                   </Flex>
+                  <Field name="address">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.address && form.touched.address}
+                      >
+                        <InputGroup>
+                          <InputLeftElement
+                            pointerEvents="none"
+                            children={<FaAddressCard color="blue.600" />}
+                            marginTop="5px"
+                          />
+                          <Input
+                            {...field}
+                            id="address"
+                            placeholder="Address"
+                            size="lg"
+                            width={{
+                              base: "100%", // 0-48em
+                              md: "100%", // 48em-80em,
+                              //   xl: "400px", // 80em+
+                            }}
+                          />
+                        </InputGroup>
+                        <FormErrorMessage>
+                          {form.errors.address}
+                        </FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
                 </Stack>
 
                 <Button
