@@ -11,20 +11,28 @@ import {
   AvatarBadge,
   Icon,
   Link,
-  Text,
 } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import BaseRouter from "./routes";
 import CartDrawer from "./components/CartDrawer";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import checkAuth from "./helpers/checkAuth";
 import { CgProfile } from "react-icons/cg";
+import { useEffect } from "react";
+import { restoreFromLocalStorageAction } from "./redux/cart/cartActionCreators";
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cart = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  // const { user } = useSelector((state) => state.user);
+  useEffect(() => {
+    const localStorageCart = JSON.parse(localStorage.getItem("foodoCart"));
+    if (localStorageCart.count > 0) {
+      dispatch(restoreFromLocalStorageAction());
+    }
+  }, []);
 
   return (
     <Router>
@@ -41,7 +49,7 @@ function App() {
         >
           {checkAuth() ? (
             <>
-              <Link>
+              <Link href="/profile">
                 <Icon as={CgProfile} w={6} h={6} />
               </Link>
             </>

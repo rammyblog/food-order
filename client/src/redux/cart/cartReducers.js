@@ -18,6 +18,10 @@ export default function cartReducer(state = initialCartState, action) {
         ...state,
         ...removeItemFromCart(state, action.payload),
       };
+    case types.RESTORE_FROM_LOCALSTORAGE:
+      return{
+        ...action.payload
+      }
 
     default:
       return state;
@@ -33,7 +37,7 @@ function addToExistingObjInCart(cart, payload) {
     existingFood.qty = qty;
     newCartState.totalAmount = calculateTotal(newCartState.foods);
     newCartState.count = countItemsInCart(newCartState.foods);
-
+    localStorage.setItem("foodoCart", JSON.stringify(newCartState));
     return newCartState;
   } else {
     food.qty = qty;
@@ -43,6 +47,7 @@ function addToExistingObjInCart(cart, payload) {
     updatedCart.totalAmount = calculateTotal(updatedCart.foods);
     updatedCart.count = countItemsInCart(updatedCart.foods);
 
+    localStorage.setItem("foodoCart", JSON.stringify(updatedCart));
     return updatedCart;
   }
 }
@@ -53,6 +58,8 @@ function removeItemFromCart(cart, payload) {
 
   newCartState.totalAmount = calculateTotal(newCartState.foods);
   newCartState.count = countItemsInCart(newCartState.foods);
+  localStorage.setItem("foodoCart", JSON.stringify(newCartState));
+
   return newCartState;
 }
 

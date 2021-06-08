@@ -18,3 +18,12 @@ export const removeFromCart = (id) => {
     });
   };
 };
+
+export const restoreFromLocalStorageAction = () => {
+  return function (dispatch) {
+    dispatch({
+      type: types.RESTORE_FROM_LOCALSTORAGE,
+      payload: JSON.parse(localStorage.getItem("foodoCart")),
+    });
+  };
+};
