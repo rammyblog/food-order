@@ -7,7 +7,7 @@ import formatDate from "../helpers/formatDate";
 const Profile = () => {
   const { orders } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.user);
-  // const {totalAmmount} = userSelector(state => state.cart)
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (!orders) {
