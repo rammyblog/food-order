@@ -7,6 +7,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
+  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -36,7 +37,7 @@ const OrderSuccess = ({ reference, orderId }) => {
               <Button colorScheme="blue" mr={3} onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="ghost">Check Orders</Button>
+              <Button variant="ghost"><Link href='/profile'>Check Orders</Link></Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
