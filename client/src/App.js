@@ -14,7 +14,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import BaseRouter, { MissingPageRouter } from "./routes";
+import BaseRouter from "./routes";
 import CartDrawer from "./components/CartDrawer";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
