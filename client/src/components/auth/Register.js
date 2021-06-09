@@ -13,7 +13,6 @@ import {
   InputLeftElement,
   Stack,
   Link,
-  Avatar,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import React, { useEffect } from "react";
@@ -359,7 +358,7 @@ const Register = ({ history }) => {
                 <Button
                   mt={4}
                   colorScheme="blue"
-                  isLoading={props.isSubmitting}
+                  isLoading={auth.loading}
                   type="submit"
                 >
                   Register

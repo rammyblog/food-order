@@ -29,6 +29,7 @@ import { getUserAction } from "../../redux/user/userActionCreators";
 const Login = ({ history }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  console.log(auth.loading)
 
   useEffect(() => {
     if (checkAuth()) {
@@ -65,8 +66,8 @@ const Login = ({ history }) => {
           <Formik
             initialValues={{ email: "", password: "" }}
             onSubmit={(values, actions) => {
-              dispatch(authLogin(values));
               actions.setSubmitting(auth.loading);
+              dispatch(authLogin(values));
             }}
             validationSchema={Yup.object({
               email: Yup.string()
@@ -143,7 +144,7 @@ const Login = ({ history }) => {
                 <Button
                   mt={4}
                   colorScheme="blue"
-                  isLoading={props.isSubmitting}
+                  isLoading={auth.loading}
                   type="submit"
                 >
                   Login

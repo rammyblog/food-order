@@ -24,6 +24,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { useEffect } from "react";
 import { restoreFromLocalStorageAction } from "./redux/cart/cartActionCreators";
 import { authLogout } from "./redux/auth/authActionCreators";
+import Footer from "./components/Footer";
 
 const CartIcon = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -104,9 +105,10 @@ function App() {
           )}
         </Box>
       </Flex>
-      <Container maxW="container.xl">
+      <Container maxW="container.xl" minHeight="80vh">
         <BaseRouter />
       </Container>
+      <Footer/>
     </Router>
   );
 }

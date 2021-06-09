@@ -3,13 +3,15 @@ import FoodGrid from "./FoodGrid";
 import { useDispatch, useSelector } from "react-redux";
 import { getFoodFromDb } from "../redux/food/foodActionCreators";
 import SpinnerReusable from "./common/Spinner";
-import { Center } from "@chakra-ui/react";
+import { Center, Text } from "@chakra-ui/react";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { loading: foodStateLoading, foods } = useSelector(
-    (state) => state.foods
-  );
+  const {
+    loading: foodStateLoading,
+    foods,
+    error,
+  } = useSelector((state) => state.foods);
   useEffect(() => {
     if (!foods) {
       dispatch(getFoodFromDb());
@@ -20,6 +22,14 @@ const Home = () => {
     return (
       <Center>
         <SpinnerReusable size="xl" />
+      </Center>
+    );
+  }
+
+  if (error) {
+    return (
+      <Center>
+        <Text fontWeight="bold">An error occurred!!</Text>
       </Center>
     );
   }
