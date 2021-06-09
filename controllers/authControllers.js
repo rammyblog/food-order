@@ -19,8 +19,8 @@ const registerController = async (req, res) => {
   try {
     await handleValidation(req.body, "register");
     const { email, username, password } = req.body;
-    const emailExist = await getUser({ email }, true);
-    const usernameExist = await getUser({ username }, true);
+    const emailExist = await User.findOne({ email });
+    const usernameExist = await User.findOne({ username });
 
     if (emailExist) {
       return res.status(400).json({ error_msg: "Email already exists" });
