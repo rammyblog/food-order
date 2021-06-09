@@ -6,7 +6,7 @@ const initialOrderState = {
   error: false,
   errResponse: "",
   orders: null,
-  singleOrder: null,  
+  singleOrder: null,
 };
 
 export default function orderReducer(state = initialOrderState, action) {
@@ -18,6 +18,7 @@ export default function orderReducer(state = initialOrderState, action) {
         error: false,
         errResponse: "",
         orderResponse: action.payload,
+        orders: [...state.orders, action.payload],
       };
     case types.GET_ORDERS:
       return {
