@@ -1,5 +1,6 @@
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Image, Flex, Text, Select, Box, IconButton } from "@chakra-ui/react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/cart/cartActionCreators";
 
@@ -21,7 +22,7 @@ const CartItem = ({ food }) => {
         <Text fontWeight="semibold" as="p">
           ₦{price}
         </Text>
-        <Select width="20%" value={qty} onChange={handleSelectChange}>
+        <Select width="20%" value={qty} onChange={(e) => handleSelectChange(e)}>
           {selectArr.map((num, idx) => (
             <option value={num} key={idx}>
               {num}

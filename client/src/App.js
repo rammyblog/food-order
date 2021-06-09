@@ -25,9 +25,32 @@ import { useEffect } from "react";
 import { restoreFromLocalStorageAction } from "./redux/cart/cartActionCreators";
 import { authLogout } from "./redux/auth/authActionCreators";
 
-function App() {
+const CartIcon = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cart = useSelector((state) => state.cart);
+  return (
+    <>
+      <Avatar
+        onClick={() => onOpen()}
+        icon={<Icon as={AiOutlineShoppingCart} />}
+        bg="white"
+        style={{ cursor: "pointer", zIndex: 1 }}
+      >
+        <AvatarBadge
+          boxSize="1.5rem"
+          bg="green.500"
+          fontSize="0.8rem"
+          color="white"
+        >
+          {cart.count > 0 ? cart.count : 0}
+        </AvatarBadge>
+      </Avatar>
+      <CartDrawer isOpen={isOpen} onClose={onClose} />
+    </>
+  );
+};
+
+function App() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,28 +61,7 @@ function App() {
       }
     }
   }, [dispatch]);
-  const CartIcon = () => {
-    return (
-      <>
-        <Avatar
-          onClick={onOpen}
-          icon={<Icon as={AiOutlineShoppingCart} />}
-          bg="white"
-          style={{ cursor: "pointer", zIndex: 1 }}
-        >
-          <AvatarBadge
-            boxSize="1.5rem"
-            bg="green.500"
-            fontSize="0.8rem"
-            color="white"
-          >
-            {cart.count > 0 ? cart.count : 0}
-          </AvatarBadge>
-        </Avatar>
-        <CartDrawer isOpen={isOpen} onClose={onClose} />
-      </>
-    );
-  };
+
   return (
     <Router>
       <Flex>

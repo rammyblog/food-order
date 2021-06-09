@@ -12,7 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import { usePaystackPayment } from "react-paystack";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { getUserAction } from "../redux/user/userActionCreators";
 import { createOrderAction } from "../redux/order/orderActionCreators";
 import OrderSuccess from "./OrderSuccess";
@@ -91,7 +91,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                         disabled={true}
                         onSuccess={onSuccess}
                       />
-                      <Box mt='10px'>
+                      <Box mt="10px">
                         <Button colorScheme="teal" mr="4">
                           <Link href="/register">Sign Up</Link>
                         </Button>
