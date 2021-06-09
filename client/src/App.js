@@ -31,11 +31,11 @@ function App() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    const localStorageCart = JSON.parse(
-      localStorage.getItem("foodoCart") || {}
-    );
-    if (localStorageCart.count > 0) {
-      dispatch(restoreFromLocalStorageAction());
+    if (localStorage.getItem("foodoCart")) {
+      const { count } = JSON.parse(localStorage.getItem("foodoCart"));
+      if (count > 0) {
+        dispatch(restoreFromLocalStorageAction());
+      }
     }
   }, [dispatch]);
   const CartIcon = () => {
