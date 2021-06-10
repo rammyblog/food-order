@@ -15,8 +15,8 @@ const CartItem = ({ food }) => {
   return (
     <div>
       <Flex justifyContent="space-between" mb="2">
-        <Image src={image} alt={name} boxSize="70px" />
-        <Box as="p" width="100px">
+        <Image src={image} alt={name} boxSize="70px" style={{objectFit:'contain'}} />
+        <Box as="p" width="100px" fontSize='0.9rem'>
           {name}
         </Box>
         <Text fontWeight="semibold" as="p">

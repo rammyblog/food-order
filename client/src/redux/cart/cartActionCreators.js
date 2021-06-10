@@ -19,6 +19,14 @@ export const removeFromCart = (id) => {
   };
 };
 
+export const clearCart = () => {
+  return function (dispatch) {
+    dispatch({
+      type: types.CLEAR_CART,
+    });
+  };
+};
+
 export const restoreFromLocalStorageAction = () => {
   return function (dispatch) {
     dispatch({

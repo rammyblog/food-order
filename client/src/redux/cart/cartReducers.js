@@ -22,7 +22,10 @@ export default function cartReducer(state = initialCartState, action) {
       return {
         ...action.payload,
       };
-   
+
+    case types.CLEAR_CART:
+      localStorage.removeItem("foodoCart");
+      return initialCartState;
 
     default:
       return state;
