@@ -18,7 +18,6 @@ import { getUserAction } from "../redux/user/userActionCreators";
 import { createOrderAction } from "../redux/order/orderActionCreators";
 import OrderSuccess from "./OrderSuccess";
 import checkAuth from "../helpers/checkAuth";
-import { clearCartAction } from "../redux/cart/cartActionCreators";
 
 const CheckoutButton = ({ initializePayment, disabled, onSuccess }) => {
   return (
