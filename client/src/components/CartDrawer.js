@@ -8,6 +8,7 @@ import {
   DrawerBody,
   Box,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
@@ -17,6 +18,7 @@ import { getUserAction } from "../redux/user/userActionCreators";
 import { createOrderAction } from "../redux/order/orderActionCreators";
 import OrderSuccess from "./OrderSuccess";
 import checkAuth from "../helpers/checkAuth";
+import { clearCartAction } from "../redux/cart/cartActionCreators";
 
 const CheckoutButton = ({ initializePayment, disabled, onSuccess }) => {
   return (
@@ -38,6 +40,7 @@ const CheckoutButton = ({ initializePayment, disabled, onSuccess }) => {
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user) || {};
@@ -57,6 +60,15 @@ const CartDrawer = ({ isOpen, onClose }) => {
   };
   const onSuccess = (props) => {
     dispatch(createOrderAction(cart, props.reference));
+    toast({
+      title: "Success",
+      description:
+        "Order is processing, Kindly wait for a popup that will confirm your order. Do not refresh this page",
+      status: "success",
+      position: "top-right",
+      duration: 5000,
+      isClosable: true,
+    });
   };
   const initializePayment = usePaystackPayment(config);
 

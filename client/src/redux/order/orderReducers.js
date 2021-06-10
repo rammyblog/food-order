@@ -11,6 +11,13 @@ const initialOrderState = {
 
 export default function orderReducer(state = initialOrderState, action) {
   switch (action.type) {
+    case types.ORDER_START:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+        errResponse: "",
+      };
     case types.PAY_FOR_ORDER:
       return {
         ...state,
@@ -23,7 +30,7 @@ export default function orderReducer(state = initialOrderState, action) {
     case types.GET_ORDERS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
         errResponse: "",
         orders: action.payload,

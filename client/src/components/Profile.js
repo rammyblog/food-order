@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrdersAction } from "../redux/order/orderActionCreators";
-import { Table, Thead, Tbody, Tr, Th, Td, Text, Link } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, Text, Link, Center } from "@chakra-ui/react";
 import formatDate from "../helpers/formatDate";
+import SpinnerReusable from "./common/Spinner";
 
 const Profile = () => {
-  const { orders } = useSelector((state) => state.order);
+  const { orders, loading, error } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -31,6 +32,17 @@ const Profile = () => {
           </Tr>
         </Thead>
         <Tbody>
+          {loading && (
+            <Center>
+              <SpinnerReusable size="xl" />
+            </Center>
+          )}
+          {error && (
+            <Center>
+              An error has occurred
+            </Center>
+          )}
+          
           {orders ? (
             orders.map((order, idx) => {
               return (

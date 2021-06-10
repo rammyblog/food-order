@@ -19,7 +19,7 @@ export const removeFromCart = (id) => {
   };
 };
 
-export const clearCart = () => {
+export const clearCartAction = () => {
   return function (dispatch) {
     dispatch({
       type: types.CLEAR_CART,

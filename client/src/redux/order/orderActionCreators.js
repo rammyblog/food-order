@@ -4,9 +4,12 @@ import { store } from "../../index";
 
 export const createOrderAction = (cart, reference) => {
   return async function (dispatch) {
+    dispatch({ type: types.ORDER_START });
+
     try {
       const res = await axios.post("api/orders", { cart, reference });
       dispatch({ type: types.PAY_FOR_ORDER, payload: res.data });
+      dispatch({ type: "CLEAR_CART" });
     } catch (error) {
       const error_msg =
         error.response && error.response.data.error_msg
@@ -19,6 +22,7 @@ export const createOrderAction = (cart, reference) => {
 
 export const getOrdersAction = () => {
   return async function (dispatch) {
+    dispatch({ type: types.ORDER_START });
     try {
       const res = await axios.get("api/orders");
       dispatch({ type: types.GET_ORDERS, payload: res.data });
@@ -34,6 +38,8 @@ export const getOrdersAction = () => {
 
 export const getSingleOrderAction = (id) => {
   return async function (dispatch) {
+    dispatch({ type: types.ORDER_START });
+
     try {
       const { order } = store.getState();
       console.log(order);
