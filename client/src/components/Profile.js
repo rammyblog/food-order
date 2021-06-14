@@ -26,6 +26,17 @@ const Profile = () => {
     }
   }, [dispatch, orders]);
 
+  if (loading) {
+    return (
+      <Center>
+        <SpinnerReusable size="xl" />
+      </Center>
+    );
+  }
+  if (error) {
+    <Center>An error has occurred</Center>;
+  }
+
   return (
     <>
       <Text textAlign="right" fontWeight="semibold" mb="20px">
@@ -36,24 +47,18 @@ const Profile = () => {
       <Table size="sm">
         <Thead>
           <Tr>
-            <Th>Id</Th>
+            <Th>Reference</Th>
             <Th>Created At</Th>
             <Th>Total Amount</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {loading && (
-            <Center>
-              <SpinnerReusable size="xl" />
-            </Center>
-          )}
-          {error && <Center>An error has occurred</Center>}
           {orders ? (
             orders.map((order, idx) => {
               return (
                 <Tr key={idx}>
                   <Td>
-                    <Link href={`/order/${order._id}`}>{order._id}</Link>
+                    <p href={`/order/${order._id}`}>{order.reference}</p>
                   </Td>
                   <Td>{formatDate(order.createdAt)}</Td>
                   <Td>₦{order.cart.totalAmount}</Td>
