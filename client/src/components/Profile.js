@@ -33,7 +33,7 @@ const Profile = () => {
       </Text>
 
       <Text fontWeight="semibold">Orders</Text>
-      <Table size="lg">
+      <Table size="sm">
         <Thead>
           <Tr>
             <Th>Id</Th>
