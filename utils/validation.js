@@ -20,4 +20,17 @@ const loginValidator = (data) => {
   return schema.validate(data);
 };
 
-module.exports = { registerValidator, loginValidator };
+const couponValidator = (data) => {
+  const schema = Joi.object({
+    code: Joi.string().min(3).required(),
+    description: Joi.string().min(3).max(1000),
+    percent_off: Joi.number().min(0).max(100).required(),
+    available: Joi.boolean().required(),
+    redeem_from: Joi.date().min("now").required(),
+    redeem_to: Joi.date().min(Joi.ref("from")).required(),
+  });
+
+  return schema.validate(data);
+};
+
+module.exports = { registerValidator, loginValidator, couponValidator };

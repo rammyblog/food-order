@@ -16,4 +16,10 @@ function ensureAuth(req, res, next) {
   }
 }
 
-module.exports = { ensureAuth };
+function ensureAdmin(req, res, next) {
+  if (req.user.role !== "admin") {
+    return res.sendStatus(403);
+  }
+  return next();
+}
+module.exports = { ensureAuth, ensureAdmin };

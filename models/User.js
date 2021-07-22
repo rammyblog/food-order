@@ -39,6 +39,11 @@ const userSchema = new Schema({
     max: 1024,
     select: false,
   },
+  role: {
+    type: String,
+    default: "member",
+    enum: ["admin", "staff", "member"],
+  },
   date: {
     type: Date,
     default: Date.now,
