@@ -63,7 +63,7 @@ function addToExistingObjInCart(cart, payload) {
     existingFood.qty = qty;
     newCartState.totalAmount = calculateTotal(
       newCartState.foods,
-      newCartState.coupon
+      newCartState.discount
     );
     newCartState.count = countItemsInCart(newCartState.foods);
     localStorage.setItem("foodoCart", JSON.stringify(newCartState));
@@ -87,7 +87,7 @@ function removeItemFromCart(cart, payload) {
 
   newCartState.totalAmount = calculateTotal(
     newCartState.foods,
-    newCartState.coupon
+    newCartState.discount
   );
   newCartState.count = countItemsInCart(newCartState.foods);
   localStorage.setItem("foodoCart", JSON.stringify(newCartState));
@@ -100,21 +100,21 @@ function updateCoupon(cart, percent_off) {
   newCartState.discount = percent_off;
   newCartState.totalAmount = calculateTotal(newCartState.foods, percent_off);
   newCartState.count = countItemsInCart(newCartState.foods);
-  newCartState.message = `Coupon has been applied! You got ${percent_off} off`;
+  newCartState.message = `Coupon has been applied! You got ${percent_off}% off`;
   // local storage cart was declared so the toast will not keep poping off
-  const local_storage_cart = { ...newCartState, message: null };
+  const local_storage_cart = { ...newCartState, message: null, discount: null };
   localStorage.setItem("foodoCart", JSON.stringify(local_storage_cart));
-
   return newCartState;
 }
 
-function calculateTotal(cart, coupon) {
+function calculateTotal(cart, discount) {
   let total = 0;
   total = cart.reduce((sum, i) => {
     return sum + i.price * i.qty;
   }, 0);
-  if (coupon) {
-    total = (coupon / 100) * total;
+  if (discount) {
+    total = total - (discount / 100) * total;
+    console.log(total);
   }
   return +total.toFixed(2);
 }
