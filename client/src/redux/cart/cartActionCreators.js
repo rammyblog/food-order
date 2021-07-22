@@ -15,7 +15,7 @@ export const updateCoupon = (coupon) => {
     }
     setTimeout(() => {
       dispatch({ type: types.CLEAR_ERROR_AND_MESSAGE });
-    }, 2000);
+    }, 1000);
   };
 };
 
