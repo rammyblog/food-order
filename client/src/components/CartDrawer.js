@@ -9,7 +9,7 @@ import {
   Box,
   Link,
   useToast,
-  Input
+  Input,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
@@ -24,10 +24,9 @@ import CouponInput from "./CouponInput";
 const CheckoutButton = ({ initializePayment, disabled, onSuccess }) => {
   return (
     <Button
-      variant="outline"
       type="submit"
       form="my-form"
-      color="blue.600"
+      color="white  "
       colorScheme="blue"
       disabled={disabled}
       onClick={() => {
