@@ -9,6 +9,7 @@ import {
   Box,
   Link,
   useToast,
+  Input
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
@@ -18,6 +19,7 @@ import { getUserAction } from "../redux/user/userActionCreators";
 import { createOrderAction } from "../redux/order/orderActionCreators";
 import OrderSuccess from "./OrderSuccess";
 import checkAuth from "../helpers/checkAuth";
+import CouponInput from "./CouponInput";
 
 const CheckoutButton = ({ initializePayment, disabled, onSuccess }) => {
   return (
@@ -85,6 +87,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                 {cart.foods.map((food, idx) => (
                   <CartItem key={idx} food={food} />
                 ))}
+                <CouponInput />
                 <Box textAlign="right" fontWeight="bold">
                   Total: ₦{cart.totalAmount}
                 </Box>
