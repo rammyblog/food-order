@@ -7,6 +7,7 @@ const orderSchema = new Schema({
     required: true,
   },
   cart: { type: Object, required: true },
+  coupon: { type: Schema.Types.ObjectId, ref: "Coupon" },
   reference: { type: String, required: true },
   createdAt: { type: Date, required: true, default: Date.now },
 });
