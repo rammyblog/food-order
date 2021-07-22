@@ -105,8 +105,8 @@ function updateCoupon(cart, percent_off, coupon) {
   newCartState.message = `Coupon has been applied! You got ${percent_off}% off`;
   newCartState.coupon = coupon;
   // local storage cart was declared so the toast will not keep poping off
-  const local_storage_cart = { ...newCartState, message: null, discount: null, coupon:null };
-  localStorage.setItem("foodoCart", JSON.stringify(local_storage_cart));
+  // const local_storage_cart = { ...newCartState, message: null, discount: null, coupon:null };
+  // localStorage.setItem("foodoCart", JSON.stringify(local_storage_cart));
   return newCartState;
 }
 
