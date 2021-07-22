@@ -51,9 +51,13 @@ const userSchema = new Schema({
 });
 
 userSchema.methods.getSignedToken = function () {
-  return jwt.sign({ _id: this._id }, process.env.TOKEN_SECRET, {
-    expiresIn: process.env.JWT_EXPIRATION,
-  });
+  return jwt.sign(
+    { _id: this._id, role: this.role },
+    process.env.TOKEN_SECRET,
+    {
+      expiresIn: process.env.JWT_EXPIRATION,
+    }
+  );
 };
 
 module.exports = model("User", userSchema);

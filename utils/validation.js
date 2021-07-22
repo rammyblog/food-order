@@ -26,8 +26,8 @@ const couponValidator = (data) => {
     description: Joi.string().min(3).max(1000),
     percent_off: Joi.number().min(0).max(100).required(),
     available: Joi.boolean().required(),
-    redeem_from: Joi.date().min("now").required(),
-    redeem_to: Joi.date().min(Joi.ref("from")).required(),
+    redeem_from: Joi.date().required(),
+    redeem_to: Joi.date().min(Joi.ref("redeem_from")).required(),
   });
 
   return schema.validate(data);
