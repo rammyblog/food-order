@@ -21,6 +21,8 @@ const getCoupons = async (req, res) => {
   }
 };
 
+
+// Check from and to date
 const getSingleCoupon = async (req, res) => {
   try {
     const coupon = await Coupon.findOne({ code: req.params.code });

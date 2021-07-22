@@ -5,10 +5,9 @@ export const updateCoupon = (coupon) => {
   return async function (dispatch) {
     try {
       const res = await axios.get(`/api/coupons/${coupon}`);
-      console.log(res.data.percent_off);
       dispatch({
         type: types.UPDATE_CART_COUPON,
-        payload: res.data.percent_off,
+        payload: { percent_off: res.data.percent_off, coupon },
       });
     } catch (error) {
       dispatch({ type: types.COUPON_ERROR, payload: "Coupon is invalid" });
