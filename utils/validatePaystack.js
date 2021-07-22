@@ -12,7 +12,6 @@ const validatePaystack = async (reference, totalAmount) => {
     );
     const { status, amount } = res.data.data;
     if (status === "success" && amount === totalAmount * 100) {
-      console.log("Success");
       return true;
     }
     return false;

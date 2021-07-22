@@ -1,4 +1,19 @@
 import * as types from "./cartActionTypes";
+import axios from "axios";
+
+export const updateCoupon = (coupon) => {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`/api/coupon/${coupon}`);
+      dispatch({
+        type: types.UPDATE_CART_COUPON,
+        coupon: res.data.percent_off,
+      });
+    } catch (error) {
+      dispatch({ type: types.COUPON_ERROR, payload: "Coupon is invalid" });
+    }
+  };
+};
 
 export const addToCart = (foodDetails, qty) => {
   return function (dispatch) {

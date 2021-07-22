@@ -3,11 +3,10 @@ const validatePaystack = require("../utils/validatePaystack");
 
 const createOrderController = async (req, res) => {
   try {
-    const { cart, reference } = req.body;
-    console.log({ cart });
+    const { cart, reference, coupon } = req.body;
     const verifyPurchase = await validatePaystack(reference, cart.totalAmount);
     if (verifyPurchase) {
-      const order = new Order({ user: req.user._id, cart, reference });
+      const order = new Order({ user: req.user._id, cart, reference, coupon });
       await order.save();
       return res.status(200).json(order);
     } else {

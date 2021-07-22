@@ -4,6 +4,9 @@ const initialCartState = {
   foods: [],
   count: 0,
   totalAmount: 0,
+  coupon: "",
+  error: null,
+  message: null,
 };
 
 export default function cartReducer(state = initialCartState, action) {
@@ -23,9 +26,21 @@ export default function cartReducer(state = initialCartState, action) {
         ...action.payload,
       };
 
+    case types.UPDATE_CART_COUPON:
+      return {
+        ...state,
+        ...updateCoupon(state, action.payload),
+      };
+
     case types.CLEAR_CART:
       localStorage.removeItem("foodoCart");
       return initialCartState;
+
+    case types.COUPON_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
 
     default:
       return state;
@@ -39,7 +54,10 @@ function addToExistingObjInCart(cart, payload) {
 
   if (existingFood) {
     existingFood.qty = qty;
-    newCartState.totalAmount = calculateTotal(newCartState.foods);
+    newCartState.totalAmount = calculateTotal(
+      newCartState.foods,
+      newCartState.coupon
+    );
     newCartState.count = countItemsInCart(newCartState.foods);
     localStorage.setItem("foodoCart", JSON.stringify(newCartState));
     return newCartState;
@@ -60,17 +78,35 @@ function removeItemFromCart(cart, payload) {
   const newCartState = { ...cart };
   newCartState.foods = newCartState.foods.filter((obj) => obj._id !== payload);
 
-  newCartState.totalAmount = calculateTotal(newCartState.foods);
+  newCartState.totalAmount = calculateTotal(
+    newCartState.foods,
+    newCartState.coupon
+  );
   newCartState.count = countItemsInCart(newCartState.foods);
   localStorage.setItem("foodoCart", JSON.stringify(newCartState));
 
   return newCartState;
 }
 
-function calculateTotal(cart) {
-  return cart.reduce((sum, i) => {
+function updateCoupon(cart, payload) {
+  const newCartState = { ...cart };
+  newCartState.coupon = payload;
+  newCartState.totalAmount = calculateTotal(newCartState.foods, payload);
+  newCartState.count = countItemsInCart(newCartState.foods);
+  newCartState.message = `Coupon has been applied! You got ${payload} off`;
+  localStorage.setItem("foodoCart", JSON.stringify(newCartState));
+  return newCartState;
+}
+
+function calculateTotal(cart, coupon) {
+  let total = 0;
+  total = cart.reduce((sum, i) => {
     return sum + i.price * i.qty;
   }, 0);
+  if (coupon) {
+    total = (coupon / 100) * total;
+  }
+  return total;
 }
 
 function countItemsInCart(cart) {

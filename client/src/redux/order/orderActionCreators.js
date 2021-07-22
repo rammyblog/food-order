@@ -42,7 +42,6 @@ export const getSingleOrderAction = (id) => {
 
     try {
       const { order } = store.getState();
-      console.log(order);
       if (!order.orders) {
         const res = await axios.get(`/api/orders/${id}`);
         dispatch({ type: types.GET_SINGLE_ORDER, payload: res.data });
