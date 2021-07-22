@@ -4,14 +4,18 @@ import axios from "axios";
 export const updateCoupon = (coupon) => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`/api/coupon/${coupon}`);
+      const res = await axios.get(`/api/coupons/${coupon}`);
+      console.log(res.data.percent_off);
       dispatch({
         type: types.UPDATE_CART_COUPON,
-        coupon: res.data.percent_off,
+        payload: res.data.percent_off,
       });
     } catch (error) {
       dispatch({ type: types.COUPON_ERROR, payload: "Coupon is invalid" });
     }
+    setTimeout(() => {
+      dispatch({ type: types.CLEAR_ERROR_AND_MESSAGE });
+    }, 2000);
   };
 };
 

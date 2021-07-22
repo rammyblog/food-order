@@ -4,7 +4,7 @@ const initialCartState = {
   foods: [],
   count: 0,
   totalAmount: 0,
-  coupon: "",
+  discount: null,
   error: null,
   message: null,
 };
@@ -40,6 +40,13 @@ export default function cartReducer(state = initialCartState, action) {
       return {
         ...state,
         error: action.payload,
+      };
+
+    case types.CLEAR_ERROR_AND_MESSAGE:
+      return {
+        ...state,
+        error: null,
+        message: null,
       };
 
     default:
@@ -88,13 +95,14 @@ function removeItemFromCart(cart, payload) {
   return newCartState;
 }
 
-function updateCoupon(cart, payload) {
+function updateCoupon(cart, percent_off) {
   const newCartState = { ...cart };
-  newCartState.coupon = payload;
-  newCartState.totalAmount = calculateTotal(newCartState.foods, payload);
+  newCartState.discount = percent_off;
+  newCartState.totalAmount = calculateTotal(newCartState.foods, percent_off);
   newCartState.count = countItemsInCart(newCartState.foods);
-  newCartState.message = `Coupon has been applied! You got ${payload} off`;
+  newCartState.message = `Coupon has been applied! You got ${percent_off} off`;
   localStorage.setItem("foodoCart", JSON.stringify(newCartState));
+
   return newCartState;
 }
 
@@ -106,7 +114,7 @@ function calculateTotal(cart, coupon) {
   if (coupon) {
     total = (coupon / 100) * total;
   }
-  return total;
+  return +total.toFixed(2);
 }
 
 function countItemsInCart(cart) {

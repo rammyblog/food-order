@@ -11,7 +11,7 @@ const handleValidation = (body, type) => {
     throw Error(error.details[0].message);
   }
 };
-const getCoupons = async(req, res) => {
+const getCoupons = async (req, res) => {
   try {
     const coupons = await Coupon.find({});
     return res.status(200).json(coupons);
@@ -21,16 +21,21 @@ const getCoupons = async(req, res) => {
   }
 };
 
-const getSingleCoupon = async(req, res) => {
+const getSingleCoupon = async (req, res) => {
   try {
     const coupon = await Coupon.findOne({ code: req.params.code });
+    if (!coupon) {
+      return res.status(404).json({ error_msg: "Coupon not found" });
+    }
+    console.log(coupon);
     return res.status(200).json(coupon);
   } catch (error) {
+    console.log(error);
     return res.status(400).json({ error_msg: error.message });
   }
 };
 
-const generateCoupon = async(req, res) => {
+const generateCoupon = async (req, res) => {
   try {
     await handleValidation(req.body, "coupon");
     const { code } = req.body;

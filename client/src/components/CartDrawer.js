@@ -45,6 +45,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user) || {};
   const { orderResponse } = useSelector((state) => state.order);
+  const { message, error } = useSelector((state) => state.cart);
   const userEmail = user.user ? user.user.email : null;
 
   useEffect(() => {
@@ -52,6 +53,30 @@ const CartDrawer = ({ isOpen, onClose }) => {
       dispatch(getUserAction());
     }
   }, [dispatch, user.user]);
+
+  useEffect(() => {
+    if (message) {
+      toast({
+        title: "Success",
+        description: message,
+        status: "success",
+        position: "top-right",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+
+    if (error) {
+      toast({
+        title: "Failed",
+        description: error,
+        status: "warning",
+        position: "top-right",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }, [toast, message, error]);
 
   const config = {
     email: user.user ? userEmail : null,
