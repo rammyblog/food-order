@@ -29,12 +29,17 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/coupons", couponRoutes);
 
 const PORT = process.env.PORT || 5000;
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
   // Set static folder
-  app.use(express.static("client/build"));
-
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    if (req.originalUrl === "/dashboard") {
+      app.use(express.static("admin/build"));
+      res.sendFile(path.resolve(__dirname, "admin", "build", "index.html"));
+    } else {
+      app.use(express.static("client/build"));
+      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    }
   });
 }
 

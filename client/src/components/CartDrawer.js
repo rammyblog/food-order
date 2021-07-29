@@ -9,7 +9,7 @@ import {
   Box,
   Link,
   useToast,
-  Input,
+  
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./CartItem";
