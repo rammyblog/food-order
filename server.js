@@ -28,20 +28,12 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/coupons", couponRoutes);
 
-let url;
-
-app.get("*", (req, res, next) => {
-  url = req.originalUrl;
-  next();
-});
-
 const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV === "production") {
   // Set static folder
-  console.log(url);
-  url === "/dashboard"
-    ? app.use(express.static("admin/build"))
-    : app.use(express.static("client/build"));
+
+  app.use(express.static("admin/build"));
+  app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {
     if (req.originalUrl === "/dashboard") {
