@@ -28,12 +28,21 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/coupons", couponRoutes);
 
+let url;
+
+app.get("*", (req, res, next) => {
+  url = req.originalUrl;
+  next();
+});
+
 const PORT = process.env.PORT || 5000;
-console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.use(express.static("admin/build"));
   // Set static folder
+  console.log(url);
+  url === "/dashboard"
+    ? app.use(express.static("admin/build"))
+    : app.use(express.static("client/build"));
+
   app.get("*", (req, res) => {
     if (req.originalUrl === "/dashboard") {
       res.sendFile(path.resolve(__dirname, "admin", "build", "index.html"));
