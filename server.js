@@ -31,13 +31,13 @@ app.use("/api/coupons", couponRoutes);
 const PORT = process.env.PORT || 5000;
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.use(express.static("admin/build"));
   // Set static folder
   app.get("*", (req, res) => {
     if (req.originalUrl === "/dashboard") {
-      app.use(express.static("admin/build"));
       res.sendFile(path.resolve(__dirname, "admin", "build", "index.html"));
     } else {
-      app.use(express.static("client/build"));
       res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     }
   });
