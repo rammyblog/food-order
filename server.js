@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 const path = require("path");
+const cors = require("cors");
 
 // Routes
 const authRoutes = require("./routes/authRoutes");
@@ -17,6 +18,7 @@ connectDB();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Logger
 app.use(morgan("tiny"));
