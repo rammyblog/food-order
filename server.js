@@ -4,7 +4,6 @@ const morgan = require("morgan");
 const connectDB = require("./config/db");
 const path = require("path");
 const cors = require("cors");
-
 // Routes
 const authRoutes = require("./routes/authRoutes");
 const foodRoutes = require("./routes/foodRoutes");
@@ -12,7 +11,6 @@ const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const couponRoutes = require("./routes/couponRoutes");
 
-// Connect to mongo db
 connectDB();
 
 const app = express();
@@ -34,15 +32,10 @@ const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV === "production") {
   // Set static folder
 
-  app.use(express.static("admin/build"));
   app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {
-    if (req.originalUrl === "/dashboard") {
-      res.sendFile(path.resolve(__dirname, "admin", "build", "index.html"));
-    } else {
-      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    }
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
