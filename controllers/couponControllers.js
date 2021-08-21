@@ -22,14 +22,13 @@ const getCoupons = async (req, res) => {
 };
 
 
-// Check from and to date
 const getSingleCoupon = async (req, res) => {
   try {
     const coupon = await Coupon.findOne({ code: req.params.code });
     if (!coupon) {
       return res.status(404).json({ error_msg: "Coupon not found" });
     }
-    console.log(coupon);
+    console.log(coupon);)
     return res.status(200).json(coupon);
   } catch (error) {
     console.log(error);
@@ -37,6 +36,7 @@ const getSingleCoupon = async (req, res) => {
   }
 };
 
+// Check from and to date
 const generateCoupon = async (req, res) => {
   try {
     await handleValidation(req.body, "coupon");
@@ -44,6 +44,9 @@ const generateCoupon = async (req, res) => {
     const codeExists = await Coupon.findOne({ code });
     if (codeExists) {
       return res.status(400).json({ error_msg: "Coupon code already exists" });
+    }
+    if(req.body.fromDate > req.body.toDate){
+      return res.status(400).json({ error_msg: "Redeem from date cannot be greater than redeem to date" });
     }
     const coupon = new Coupon(req.body);
     const savedCoupon = await coupon.save();
@@ -53,4 +56,30 @@ const generateCoupon = async (req, res) => {
   }
 };
 
-module.exports = { getCoupons, getSingleCoupon, generateCoupon };
+
+const editCoupon = async (req, res) => {
+  try {
+    await handleValidation(req.body, "coupon");
+   const coupon = await Coupon.findOne({ code: req.params.code });
+
+    if (!coupon) {
+      return res.status(400).json({ error_msg: "Coupon does not exist" });
+    }
+    if(req.body.fromDate > req.body.toDate){
+      return res.status(400).json({ error_msg: "Redeem from date cannot be greater than redeem to date" });
+    }
+    const editedCoupon = await Coupon.findOneAndUpdate(
+      req.params.code,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    return res.status(201).json({ coupon: editedCoupon });
+  } catch (error) {
+    return res.status(400).json({ error_msg: error.message });
+  }
+};
+
+module.exports = { getCoupons, getSingleCoupon, generateCoupon, editCoupon };
