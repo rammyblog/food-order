@@ -9,8 +9,8 @@ const { ensureAdmin, ensureAuth } = require("../middlewares/ensureAuth");
 
 router.get("/", getCoupons);
 router.post("/", ensureAuth, ensureAdmin, generateCoupon);
-router.put("/:code", ensureAuth, ensureAdmin, editCoupon);
-router.get("/:code", getSingleCoupon);
+router.put("/:id", ensureAuth, ensureAdmin, editCoupon);
+router.get("/:id", getSingleCoupon);
 
 
 

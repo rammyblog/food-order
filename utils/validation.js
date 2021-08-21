@@ -24,6 +24,7 @@ const couponValidator = (data) => {
   const schema = Joi.object({
     code: Joi.string().min(3).required(),
     description: Joi.string().min(3).max(1000),
+    // _id: Joi.string(),
     percent_off: Joi.number().min(0).max(100).required(),
     available: Joi.boolean().required(),
     redeem_from: Joi.date().required(),

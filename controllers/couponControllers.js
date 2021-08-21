@@ -24,11 +24,10 @@ const getCoupons = async (req, res) => {
 
 const getSingleCoupon = async (req, res) => {
   try {
-    const coupon = await Coupon.findOne({ code: req.params.code });
+    const coupon = await Coupon.findOne({ _id: req.params.id });
     if (!coupon) {
       return res.status(404).json({ error_msg: "Coupon not found" });
     }
-    console.log(coupon);)
     return res.status(200).json(coupon);
   } catch (error) {
     console.log(error);
@@ -60,23 +59,29 @@ const generateCoupon = async (req, res) => {
 const editCoupon = async (req, res) => {
   try {
     await handleValidation(req.body, "coupon");
-   const coupon = await Coupon.findOne({ code: req.params.code });
-
-    if (!coupon) {
-      return res.status(400).json({ error_msg: "Coupon does not exist" });
+   const coupon = await Coupon.findOne({ _id: req.params.id });
+   const { code } = req.body;
+   if(code !== coupon.code){
+     const codeExists = await Coupon.findOne({ code });
+     if (codeExists) {
+      return res.status(400).json({ error_msg: "Coupon code already exists" });
     }
+  }else{
+    delete req.body.code
+  }
+
     if(req.body.fromDate > req.body.toDate){
       return res.status(400).json({ error_msg: "Redeem from date cannot be greater than redeem to date" });
     }
     const editedCoupon = await Coupon.findOneAndUpdate(
-      req.params.code,
+      req.params.id,
       req.body,
       {
         new: true,
         runValidators: true,
       }
     );
-    return res.status(201).json({ coupon: editedCoupon });
+    return res.status(200).json({ coupon: editedCoupon });
   } catch (error) {
     return res.status(400).json({ error_msg: error.message });
   }
