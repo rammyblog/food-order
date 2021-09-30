@@ -4,7 +4,7 @@ import axios from "axios";
 export const updateCoupon = (coupon) => {
   return async function (dispatch) {
     try {
-      const res = await axios.get(`/api/coupons/${coupon}`);
+      const res = await axios.get(`/api/coupons/code/${coupon}`);
       dispatch({
         type: types.UPDATE_CART_COUPON,
         payload: { percent_off: res.data.percent_off, coupon },

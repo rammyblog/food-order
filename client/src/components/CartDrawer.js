@@ -112,6 +112,15 @@ const CartDrawer = ({ isOpen, onClose }) => {
                   <CartItem key={idx} food={food} />
                 ))}
                 <CouponInput />
+                { cart.priceBeforeCoupon &&
+                  <Box textAlign="right" fontWeight="bold">
+                  Original Price: ₦{cart.priceBeforeCoupon}
+                  <br />
+                  Discount: {cart.discount} %
+
+                </Box> 
+                }
+
                 <Box textAlign="right" fontWeight="bold">
                   Total: ₦{cart.totalAmount}
                 </Box>

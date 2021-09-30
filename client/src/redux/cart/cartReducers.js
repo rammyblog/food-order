@@ -8,6 +8,7 @@ const initialCartState = {
   error: null,
   message: null,
   coupon: null,
+  priceBeforeCoupon:  null
 };
 
 export default function cartReducer(state = initialCartState, action) {
@@ -100,6 +101,7 @@ function removeItemFromCart(cart, payload) {
 function updateCoupon(cart, percent_off, coupon) {
   const newCartState = { ...cart };
   newCartState.discount = percent_off;
+  newCartState.priceBeforeCoupon = newCartState.totalAmount
   newCartState.totalAmount = calculateTotal(newCartState.foods, percent_off);
   newCartState.count = countItemsInCart(newCartState.foods);
   newCartState.message = `Coupon has been applied! You got ${percent_off}% off`;

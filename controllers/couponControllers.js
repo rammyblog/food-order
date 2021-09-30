@@ -24,7 +24,23 @@ const getCoupons = async (req, res) => {
 
 const getSingleCoupon = async (req, res) => {
   try {
-    const coupon = await Coupon.findOne({ _id: req.params.id });
+    const couponByID = await Coupon.findOne({ _id: req.params.id });
+    const couponByCode = await Coupon.findOne({ code: req.params.id });
+    if (!coupon || !couponByCode) {
+      return res.status(404).json({ error_msg: "Coupon not found" });
+    }
+    const coupon = couponByCode || couponByID;
+    console.log(coupon);
+    return res.status(200).json(coupon);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ error_msg: error.message });
+  }
+};
+
+const getSingleCouponByCode = async (req, res) => {
+  try {
+    const coupon = await Coupon.findOne({ code: req.params.code });
     if (!coupon) {
       return res.status(404).json({ error_msg: "Coupon not found" });
     }
@@ -87,4 +103,4 @@ const editCoupon = async (req, res) => {
   }
 };
 
-module.exports = { getCoupons, getSingleCoupon, generateCoupon, editCoupon };
+module.exports = { getCoupons, getSingleCoupon, generateCoupon, editCoupon, getSingleCouponByCode };
