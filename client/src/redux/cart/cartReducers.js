@@ -1,4 +1,4 @@
-import * as types from "./cartActionTypes";
+import * as types from './cartActionTypes';
 
 const initialCartState = {
   foods: [],
@@ -8,7 +8,7 @@ const initialCartState = {
   error: null,
   message: null,
   coupon: null,
-  priceBeforeCoupon:  null
+  priceBeforeCoupon: null,
 };
 
 export default function cartReducer(state = initialCartState, action) {
@@ -29,14 +29,14 @@ export default function cartReducer(state = initialCartState, action) {
       };
 
     case types.UPDATE_CART_COUPON:
-      const {coupon, percent_off} = action.payload;
+      const { coupon, percent_off } = action.payload;
       return {
         ...state,
         ...updateCoupon(state, percent_off, coupon),
       };
 
     case types.CLEAR_CART:
-      localStorage.removeItem("foodoCart");
+      localStorage.removeItem('foodoCart');
       return initialCartState;
 
     case types.COUPON_ERROR:
@@ -61,25 +61,25 @@ function addToExistingObjInCart(cart, payload) {
   const newCartState = { ...cart };
   const { food, qty } = payload;
   let existingFood = newCartState.foods.find((obj) => obj._id === food._id);
-
   if (existingFood) {
     existingFood.qty = qty;
+    newCartState.priceBeforeCoupon = calculateTotal(newCartState.foods);
     newCartState.totalAmount = calculateTotal(
       newCartState.foods,
       newCartState.discount
     );
     newCartState.count = countItemsInCart(newCartState.foods);
-    localStorage.setItem("foodoCart", JSON.stringify(newCartState));
+    localStorage.setItem('foodoCart', JSON.stringify(newCartState));
     return newCartState;
   } else {
     food.qty = qty;
     let updatedCart = { ...cart };
     updatedCart.foods = [...updatedCart.foods, food];
-
-    updatedCart.totalAmount = calculateTotal(updatedCart.foods);
+    updatedCart.priceBeforeCoupon = calculateTotal(updatedCart.foods);
+    updatedCart.totalAmount = calculateTotal(updatedCart.foods, cart.discount);
     updatedCart.count = countItemsInCart(updatedCart.foods);
 
-    localStorage.setItem("foodoCart", JSON.stringify(updatedCart));
+    localStorage.setItem('foodoCart', JSON.stringify(updatedCart));
     return updatedCart;
   }
 }
@@ -87,13 +87,13 @@ function addToExistingObjInCart(cart, payload) {
 function removeItemFromCart(cart, payload) {
   const newCartState = { ...cart };
   newCartState.foods = newCartState.foods.filter((obj) => obj._id !== payload);
-
+  newCartState.priceBeforeCoupon = calculateTotal(newCartState.foods);
   newCartState.totalAmount = calculateTotal(
     newCartState.foods,
     newCartState.discount
   );
   newCartState.count = countItemsInCart(newCartState.foods);
-  localStorage.setItem("foodoCart", JSON.stringify(newCartState));
+  localStorage.setItem('foodoCart', JSON.stringify(newCartState));
 
   return newCartState;
 }
@@ -101,7 +101,7 @@ function removeItemFromCart(cart, payload) {
 function updateCoupon(cart, percent_off, coupon) {
   const newCartState = { ...cart };
   newCartState.discount = percent_off;
-  newCartState.priceBeforeCoupon = newCartState.totalAmount
+  newCartState.priceBeforeCoupon = calculateTotal(newCartState.foods);
   newCartState.totalAmount = calculateTotal(newCartState.foods, percent_off);
   newCartState.count = countItemsInCart(newCartState.foods);
   newCartState.message = `Coupon has been applied! You got ${percent_off}% off`;
