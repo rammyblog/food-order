@@ -1,4 +1,4 @@
-import "./App.css";
+import './App.css';
 import {
   Flex,
   Button,
@@ -12,19 +12,19 @@ import {
   Icon,
   Link,
   IconButton,
-} from "@chakra-ui/react";
-import { BrowserRouter as Router } from "react-router-dom";
-import BaseRouter from "./routes";
-import CartDrawer from "./components/CartDrawer";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
-import checkAuth from "./helpers/checkAuth";
-import { CgProfile } from "react-icons/cg";
-import { IoLogOutOutline } from "react-icons/io5";
-import { useEffect } from "react";
-import { restoreFromLocalStorageAction } from "./redux/cart/cartActionCreators";
-import { authLogout } from "./redux/auth/authActionCreators";
-import Footer from "./components/Footer";
+} from '@chakra-ui/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import BaseRouter from './routes';
+import CartDrawer from './components/CartDrawer';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { useSelector, useDispatch } from 'react-redux';
+import checkAuth from './helpers/checkAuth';
+import { CgProfile } from 'react-icons/cg';
+import { IoLogOutOutline } from 'react-icons/io5';
+import { useEffect } from 'react';
+import { restoreFromLocalStorageAction } from './redux/cart/cartActionCreators';
+import { authLogout } from './redux/auth/authActionCreators';
+import Footer from './components/Footer';
 
 const CartIcon = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,7 +35,7 @@ const CartIcon = () => {
         onClick={() => onOpen()}
         icon={<Icon as={AiOutlineShoppingCart} />}
         bg="white"
-        style={{ cursor: "pointer", zIndex: 1 }}
+        style={{ cursor: 'pointer', zIndex: 1 }}
       >
         <AvatarBadge
           boxSize="1.5rem"
@@ -55,8 +55,8 @@ function App() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (localStorage.getItem("foodoCart")) {
-      const { count } = JSON.parse(localStorage.getItem("foodoCart"));
+    if (localStorage.getItem('foodoCart')) {
+      const { count } = JSON.parse(localStorage.getItem('foodoCart'));
       if (count > 0) {
         dispatch(restoreFromLocalStorageAction());
       }
@@ -75,9 +75,9 @@ function App() {
         <Box
           p="4"
           style={{
-            display: "flex",
-            alignItems: "center",
-            cursor: "pointer",
+            display: 'flex',
+            alignItems: 'center',
+            cursor: 'pointer',
           }}
         >
           {checkAuth() || user ? (
@@ -108,7 +108,7 @@ function App() {
       <Container maxW="container.xl" minHeight="80vh">
         <BaseRouter />
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }
